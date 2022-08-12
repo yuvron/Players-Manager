@@ -1,12 +1,16 @@
-import { Client } from "pg";
+import { Pool } from "pg";
 
 class Db {
-	client: Client;
+	client: Pool;
 
 	constructor() {
-		this.client = new Client({
+		this.client = new Pool({
 			connectionString: process.env.DATABASE_URL,
 			ssl: { rejectUnauthorized: false },
+			idleTimeoutMillis: 0,
+			connectionTimeoutMillis: 0,
+			keepAlive: true,
+			port: 5432,
 		});
 	}
 

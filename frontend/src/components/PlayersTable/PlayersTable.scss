@@ -1,0 +1,42 @@
+@import "../../style-partials/utilities";
+@import "../../style-partials/variables";
+
+.users-table {
+	margin: 0 auto;
+	width: 100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: white;
+	border-radius: 10px;
+	height: 100%;
+	overflow: auto;
+	table {
+		width: 100%;
+	}
+	tr {
+		border-bottom: 1px solid $very_light_gray;
+	}
+	thead tr {
+		top: 0;
+		position: sticky;
+		background-color: lightgray;
+	}
+	tbody tr:last-of-type {
+		border-bottom: 0;
+	}
+	th,
+	td {
+		text-align: center;
+		text-transform: capitalize;
+	}
+	th {
+		font-weight: bold;
+		padding: 1em 0.7em;
+	}
+	td {
+		padding: 1.5em 0.7em;
+	}
+	.user-wage::after,
+	.user-value::after {
+		content: "$";
+	}
+}
