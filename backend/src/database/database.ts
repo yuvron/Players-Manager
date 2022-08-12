@@ -13,6 +13,16 @@ class Db {
 	async connect(): Promise<void> {
 		await this.client.connect();
 	}
+
+	async getAllPlayers(): Promise<any[]> {
+		const sql = "SELECT * FROM players";
+		return (await this.client.query(sql)).rows;
+	}
+
+	async getAllAgents(): Promise<any[]> {
+		const sql = "SELECT * FROM agents";
+		return (await this.client.query(sql)).rows;
+	}
 }
 
 export default Db;
