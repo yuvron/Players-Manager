@@ -19,9 +19,19 @@ class Db {
 		return (await this.client.query(sql)).rows;
 	}
 
+	async getPlayerById(id: number): Promise<any> {
+		const sql = "SELECT * FROM players WHERE id = $1";
+		return (await this.client.query(sql, [id])).rows[0];
+	}
+
 	async getAllAgents(): Promise<any[]> {
 		const sql = "SELECT * FROM agents";
 		return (await this.client.query(sql)).rows;
+	}
+
+	async getAgentById(id: number): Promise<any> {
+		const sql = "SELECT * FROM agents WHERE id = $1";
+		return (await this.client.query(sql, [id])).rows[0];
 	}
 }
 
