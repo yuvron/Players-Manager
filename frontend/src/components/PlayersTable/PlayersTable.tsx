@@ -1,6 +1,7 @@
 import { Component } from "react";
 import axios from "axios";
 import "./PlayersTable.scss";
+import Loader from "../Loader/Loader";
 
 interface Player {
 	id: number;
@@ -66,6 +67,7 @@ class PlayersTable extends Component {
 	}
 
 	render() {
+		if (this.state.players.length === 0) return <Loader />;
 		return (
 			<div className="users-table">
 				<table>
