@@ -1,0 +1,27 @@
+@import "../../style-partials/utilities";
+@import "../../style-partials/presets";
+
+.add-player-form {
+	font-size: 1.2rem;
+	h3 {
+		font-size: 2.5rem;
+		font-weight: bold;
+	}
+	form {
+		@include flex(column, center, center);
+	}
+	input,
+	select {
+		width: 50%;
+		border: 1px solid lightgray;
+		border-radius: 3px;
+		padding: 0.4em 0.4em;
+	}
+	& > *,
+	form > * {
+		margin: 0.4em 0;
+	}
+	button {
+		@include button;
+	}
+}

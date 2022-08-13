@@ -1,0 +1,28 @@
+@import "../../style-partials/utilities";
+
+.modal {
+	@include position(fixed, 0, 0);
+	@include size(100%, 100%);
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	@include centerAbsolute;
+	position: relative;
+	background: white;
+	padding: 2em;
+	width: 50%;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	i {
+		font-size: 2rem;
+		@include position(absolute, 2%, 97%);
+		transform: translateX(-100%);
+		color: gray;
+		cursor: pointer;
+		transition: color 0.3s;
+		&:hover {
+			color: black;
+		}
+	}
+}

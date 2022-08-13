@@ -1,0 +1,6 @@
+@import "../../style-partials/utilities";
+
+.form-item {
+	@include flex(row, space-between, center);
+	width: 100%;
+}
