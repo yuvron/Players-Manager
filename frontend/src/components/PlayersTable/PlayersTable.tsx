@@ -32,7 +32,7 @@ class PlayersTable extends Component {
 				});
 			})
 			.catch((err) => {
-				if (err.response) console.log(err.response);
+				if (err.response && err.response.status === 500) location.reload();
 				else console.log(err);
 			});
 	}
@@ -59,7 +59,7 @@ class PlayersTable extends Component {
 	renderHeaders() {
 		if (this.state.players[0]) {
 			return Object.keys(this.state.players[0]).map((key) => {
-				let formattedKey = key.replaceAll("_", " ");
+				const formattedKey = key.replaceAll("_", " ");
 				return <th key={key}>{formattedKey}</th>;
 			});
 		} else return [];
