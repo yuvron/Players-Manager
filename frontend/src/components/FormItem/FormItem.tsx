@@ -2,32 +2,47 @@ import { Component } from "react";
 import "./FormItem.scss";
 
 interface FromItemProps {
-	onChange: (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => void;
+	parentOnChange: (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => void;
 	name: string;
-	isSelect: boolean;
 	labelText: string;
+	required?: boolean;
 	type?: string;
-	required: boolean;
 	min?: number;
 	max?: number;
 	minLength?: number;
 	maxLength?: number;
+	isSelect?: boolean;
 	selectOptions?: React.ReactNode[];
 }
 
+interface FormItemState {
+	value: string;
+}
+
 class FormItem extends Component<FromItemProps> {
+	state: FormItemState = { value: "" };
+
+	onChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+		this.setState({ value: e.target.value.trim() });
+		this.props.parentOnChange(e);
+	};
+
 	renderInput() {
-		const inputAttributes: { [key: string]: string | number } = {};
+		const inputAttributes: { [key: string]: string | number | boolean } = { name: this.props.name };
+		if (this.props.required) inputAttributes.required = this.props.required;
+		if (this.props.type) inputAttributes.type = this.props.type;
 		if (this.props.min) inputAttributes.min = this.props.min;
 		if (this.props.max) inputAttributes.max = this.props.max;
 		if (this.props.minLength) inputAttributes.minLength = this.props.minLength;
 		if (this.props.maxLength) inputAttributes.maxLength = this.props.maxLength;
-		return <input name={this.props.name} onChange={this.props.onChange} type="text" {...inputAttributes} required={this.props.required} />;
+		return <input value={this.state.value} onChange={this.onChange} {...inputAttributes} />;
 	}
 
 	renderSelect() {
+		const inputAttributes: { [key: string]: string | number | boolean } = { name: this.props.name };
+		if (this.props.required) inputAttributes.required = this.props.required;
 		return (
-			<select name={this.props.name} onChange={this.props.onChange} required={this.props.required}>
+			<select value={this.state.value} onChange={this.onChange} {...inputAttributes}>
 				{this.props.selectOptions}
 			</select>
 		);
@@ -36,7 +51,7 @@ class FormItem extends Component<FromItemProps> {
 	render() {
 		return (
 			<div className="form-item">
-				<label htmlFor="">{this.props.labelText}</label>
+				<label htmlFor={this.props.name}>{this.props.labelText}</label>
 				{this.props.isSelect || this.renderInput()}
 				{this.props.isSelect && this.renderSelect()}
 			</div>

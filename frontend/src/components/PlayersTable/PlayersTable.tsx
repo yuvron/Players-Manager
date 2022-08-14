@@ -25,6 +25,18 @@ class PlayersTable extends Component {
 	state: PlayersTableState = { players: [] };
 
 	componentDidMount() {
+		this.getPlayers();
+	}
+
+	shouldComponentUpdate(nextProps: any, nextState: PlayersTableState) {
+		return this.state.players.length !== nextState.players.length;
+	}
+
+	componentDidUpdate() {
+		this.getPlayers();
+	}
+
+	getPlayers() {
 		axios
 			.get("/api/players")
 			.then((response) => {

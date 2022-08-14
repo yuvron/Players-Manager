@@ -20,6 +20,10 @@ class App extends Component {
 		this.setState({ isAdding: false });
 	};
 
+	onPlayerAdded = () => {
+		this.setState({ isAdding: false });
+	};
+
 	render() {
 		return (
 			<div className="app">
@@ -27,7 +31,7 @@ class App extends Component {
 				<PlayersTable />
 				{this.state.isAdding && (
 					<Modal handleClose={this.onAddModalClose}>
-						<AddPlayerForm />
+						<AddPlayerForm handlePlayerAdded={this.onPlayerAdded} />
 					</Modal>
 				)}
 			</div>
