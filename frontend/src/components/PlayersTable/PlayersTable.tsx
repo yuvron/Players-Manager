@@ -28,10 +28,6 @@ class PlayersTable extends Component {
 		this.getPlayers();
 	}
 
-	shouldComponentUpdate(nextProps: any, nextState: PlayersTableState) {
-		return this.state.players.length !== nextState.players.length;
-	}
-
 	componentDidUpdate() {
 		this.getPlayers();
 	}
@@ -40,9 +36,9 @@ class PlayersTable extends Component {
 		axios
 			.get("/api/players")
 			.then((response) => {
-				this.setState({
-					players: response.data,
-				});
+				if (response.data.length !== this.state.players.length) {
+					this.setState({ players: response.data });
+				}
 			})
 			.catch((err) => {
 				if (err.response && err.response.status === 500) location.reload();

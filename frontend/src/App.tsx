@@ -1,42 +1,24 @@
-import { Component } from "react";
+import { useState } from "react";
 import "./App.scss";
 import PlayersTable from "./components/PlayersTable/PlayersTable";
 import AddPlayerButton from "./components/AddPlayerButton/AddPlayerButton";
 import Modal from "./components/Modal/Modal";
 import AddPlayerForm from "./components/AddPlayerForm/AddPlayerForm";
 
-interface AppState {
-	isAdding: boolean;
-}
+const App: React.FC = () => {
+	const [isAdding, setIsAdding] = useState(false);
 
-class App extends Component {
-	state: AppState = { isAdding: false };
-
-	onAddClick = () => {
-		this.setState({ isAdding: true });
-	};
-
-	onAddModalClose = () => {
-		this.setState({ isAdding: false });
-	};
-
-	onPlayerAdded = () => {
-		this.setState({ isAdding: false });
-	};
-
-	render() {
-		return (
-			<div className="app">
-				<AddPlayerButton handleClick={this.onAddClick} />
-				<PlayersTable />
-				{this.state.isAdding && (
-					<Modal handleClose={this.onAddModalClose}>
-						<AddPlayerForm handlePlayerAdded={this.onPlayerAdded} />
-					</Modal>
-				)}
-			</div>
-		);
-	}
-}
+	return (
+		<div className="app">
+			<AddPlayerButton handleClick={() => setIsAdding(true)} />
+			<PlayersTable />
+			{isAdding && (
+				<Modal handleClose={() => setIsAdding(false)}>
+					<AddPlayerForm handlePlayerAdded={() => setIsAdding(false)} />
+				</Modal>
+			)}
+		</div>
+	);
+};
 
 export default App;

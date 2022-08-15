@@ -70,9 +70,8 @@ class AddPlayerForm extends Component<AddPlayerFormProps> {
 					.filter((c) => c !== ""),
 				agent: this.state.agent,
 			})
-			.then((response) => {
+			.then(() => {
 				this.setState({ isLoading: false });
-				console.log(response.data);
 				this.props.handlePlayerAdded();
 			})
 			.catch((err) => {

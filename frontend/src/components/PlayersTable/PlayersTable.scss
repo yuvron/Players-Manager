@@ -44,4 +44,9 @@
 	.user-value::after {
 		content: "$";
 	}
+	.user-first_name,
+	.user-last_name,
+	.user-club {
+		font-weight: bold;
+	}
 }
