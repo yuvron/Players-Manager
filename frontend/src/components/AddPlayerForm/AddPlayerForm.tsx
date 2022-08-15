@@ -84,7 +84,7 @@ class AddPlayerForm extends Component<AddPlayerFormProps> {
 	};
 
 	onFormItemChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({ [e.target.name]: e.target.value.trim() });
 	};
 
 	render() {
