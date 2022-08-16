@@ -1,0 +1,16 @@
+@import "../../style-partials/utilities";
+@import "../../style-partials/variables";
+
+.action-buttons {
+	@include flex(row, center, center);
+	font-size: 1.6rem;
+	.edit-button,
+	.delete-button {
+		margin: 0 0.3em;
+		transition: transform 0.2s;
+		color: $pretty-blue;
+		&:hover {
+			transform: scale(1.25);
+		}
+	}
+}

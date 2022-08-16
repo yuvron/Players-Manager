@@ -3,8 +3,8 @@ import { Pool } from "pg";
 const client = new Pool({
 	connectionString: process.env.DATABASE_URL,
 	ssl: { rejectUnauthorized: false },
-	idleTimeoutMillis: 0,
-	connectionTimeoutMillis: 0,
+	idleTimeoutMillis: 72000000,
+	connectionTimeoutMillis: 72000000,
 	keepAlive: true,
 	port: 5432,
 });

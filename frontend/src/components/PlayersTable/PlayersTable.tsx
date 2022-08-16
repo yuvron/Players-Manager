@@ -1,5 +1,6 @@
 import "./PlayersTable.scss";
 import Loader from "../Loader/Loader";
+import ActionButtons from "../ActionButtons/ActionButtons";
 import usePlayers from "../../hooks/usePlayers";
 
 const PlayersTable: React.FC = () => {
@@ -19,6 +20,9 @@ const PlayersTable: React.FC = () => {
 							</td>
 						);
 					})}
+					<td>
+						<ActionButtons />
+					</td>
 				</tr>
 			);
 		});
@@ -26,10 +30,15 @@ const PlayersTable: React.FC = () => {
 
 	const renderHeaders = () => {
 		if (players[0]) {
-			return Object.keys(players[0]).map((key) => {
-				const formattedKey = key.replaceAll("_", " ");
-				return <th key={key}>{formattedKey}</th>;
-			});
+			return (
+				<>
+					{Object.keys(players[0]).map((key) => {
+						const formattedKey = key.replaceAll("_", " ");
+						return <th key={key}>{formattedKey}</th>;
+					})}
+					<th key="actions">Actions</th>
+				</>
+			);
 		} else return [];
 	};
 
