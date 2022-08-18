@@ -7,6 +7,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": "./src",
 		"rootDir": "./src",
-		"outDir": "../build"
+		"outDir": "../deploy"
 	}
 }
