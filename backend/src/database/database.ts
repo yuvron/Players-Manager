@@ -23,6 +23,11 @@ export async function getPlayerById(id: number): Promise<any> {
 	return (await client.query(sql, [id])).rows[0];
 }
 
+export async function deletePlayerById(id: number): Promise<any> {
+	const sql = "DELETE FROM players WHERE id = $1 RETURNING *";
+	return (await client.query(sql, [id])).rows[0];
+}
+
 export async function createPlayer({ firstName, lastName, age, nationality, club, position, wage, value, history, agent }): Promise<any> {
 	const sql = `INSERT INTO players
 	(first_name,last_name,age,nationality,club,position,wage,value,clubs_history,agent_id)

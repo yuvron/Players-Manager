@@ -4,7 +4,7 @@ import ActionButtons from "../ActionButtons/ActionButtons";
 import usePlayers from "../../hooks/usePlayers";
 
 const PlayersTable: React.FC = () => {
-	const players = usePlayers();
+	const [players, deletePlayer] = usePlayers();
 
 	const renderPlayers = () => {
 		return players.map((player) => {
@@ -21,7 +21,7 @@ const PlayersTable: React.FC = () => {
 						);
 					})}
 					<td>
-						<ActionButtons />
+						<ActionButtons onDelete={() => deletePlayer(player.id)} />
 					</td>
 				</tr>
 			);

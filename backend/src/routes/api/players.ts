@@ -61,4 +61,22 @@ router.post("/", (req: Request, res: Response) => {
 		});
 });
 
+// Deletes a player by id
+router.delete("/:id", (req: Request, res: Response) => {
+	const id = +req.params.id;
+	if (!isNaN(id)) {
+		db.deletePlayerById(id)
+			.then((player) => {
+				if (player) res.json(player);
+				else res.sendStatus(404);
+			})
+			.catch((err) => {
+				console.log(err.message);
+				res.sendStatus(500);
+			});
+	} else {
+		res.status(400).send({ error: "Id must be a number" });
+	}
+});
+
 export default router;

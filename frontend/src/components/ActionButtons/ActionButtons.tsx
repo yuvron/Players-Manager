@@ -1,12 +1,16 @@
 import "./ActionButtons.scss";
 
-const ActionButtons: React.FC = () => {
+interface ActionButtonsProps {
+	onDelete: () => void;
+}
+
+const ActionButtons: React.FC<ActionButtonsProps> = ({ onDelete }) => {
 	return (
 		<div className="action-buttons">
 			<button>
 				<i className="edit-button fa-solid fa-pen-to-square"></i>
 			</button>
-			<button>
+			<button onClick={onDelete}>
 				<i className="delete-button fa-solid fa-trash-can"></i>
 			</button>
 		</div>

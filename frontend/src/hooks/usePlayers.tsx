@@ -36,7 +36,19 @@ const usePlayers = () => {
 			});
 	};
 
-	return players;
+	const deletePlayer = (id: number) => {
+		axios
+			.delete(`/api/players/${id}`)
+			.then(() => {
+				setPlayers(players.filter((p) => p.id !== id));
+			})
+			.catch((err) => {
+				if (err.response && err.response.status === 500) location.reload();
+				else console.log(err);
+			});
+	};
+
+	return [players, deletePlayer] as const;
 };
 
 export default usePlayers;

@@ -14,11 +14,12 @@
 	},
 	"plugins": ["react", "@typescript-eslint"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"@typescript-eslint/indent": ["error", "tab"],
 		"linebreak-style": ["error", "windows"],
 		"quotes": ["error", "double"],
 		"semi": ["error", "always"],
 		"react/react-in-jsx-scope": ["off"],
+		"react/prop-types": ["off"],
 		"@typescript-eslint/no-non-null-assertion": ["off"]
 	}
 }
