@@ -10,6 +10,11 @@ React (Typescript), Express (Typescript), PostgreSQL
 
 ## Heroku Deployment
 
+### IMPORTANT:
+
+Don't delete any of the first 50 players, they were not easy to generate :)  
+If you want to try the delete method, create a player and then delete him
+
 https://players-manager.herokuapp.com/
 
 ---

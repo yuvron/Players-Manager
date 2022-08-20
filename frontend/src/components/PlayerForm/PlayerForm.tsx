@@ -50,15 +50,13 @@ class PlayerForm extends Component<PlayerFormProps> {
 	};
 
 	componentDidMount() {
-		apiGetAgents()
-			.then((agents) => {
-				this.setState({
-					isLoading: false,
-					agents: agents,
-					agent: agents[0].id,
-				});
-			})
-			.catch(() => this.setState({ isLoading: false }));
+		apiGetAgents().then((agents) => {
+			this.setState({
+				isLoading: false,
+				agents: agents,
+				agent: agents[0].id,
+			});
+		});
 		this.setState({ isLoading: true });
 	}
 
@@ -82,10 +80,7 @@ class PlayerForm extends Component<PlayerFormProps> {
 					.filter((c) => c !== ""),
 				agent_id,
 			};
-			this.props
-				.handleSubmit(player)
-				.then(() => this.setState({ isLoading: false }))
-				.catch(() => this.setState({ isLoading: false }));
+			this.props.handleSubmit(player).then(() => this.setState({ isLoading: false }));
 			this.setState({ isLoading: true });
 		}
 	};
