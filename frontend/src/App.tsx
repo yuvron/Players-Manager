@@ -1,20 +1,48 @@
 import { useState } from "react";
-import "./App.scss";
 import PlayersTable from "./components/PlayersTable/PlayersTable";
 import AddPlayerButton from "./components/AddPlayerButton/AddPlayerButton";
 import Modal from "./components/Modal/Modal";
-import AddPlayerForm from "./components/AddPlayerForm/AddPlayerForm";
+import PlayerForm from "./components/PlayerForm/PlayerForm";
+import { Player } from "./api/players";
+import usePlayers from "./hooks/usePlayers";
+import "./App.scss";
 
 const App: React.FC = () => {
+	const [players, createPlayer, updatePlayer, deletePlayer] = usePlayers();
 	const [isAdding, setIsAdding] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedPlayer, setEditedPlayer] = useState<Player | undefined>(undefined);
 
 	return (
 		<div className="app">
 			<AddPlayerButton handleClick={() => setIsAdding(true)} />
-			<PlayersTable />
+			<PlayersTable
+				players={players}
+				handleEdit={(player: Player) => {
+					setIsEditing(true);
+					setEditedPlayer(player);
+				}}
+				handleDelete={deletePlayer}
+			/>
 			{isAdding && (
 				<Modal handleClose={() => setIsAdding(false)}>
-					<AddPlayerForm handlePlayerAdded={() => setIsAdding(false)} />
+					<PlayerForm
+						handleSubmit={async (player: Player) => {
+							await createPlayer(player);
+							setIsAdding(false);
+						}}
+					/>
+				</Modal>
+			)}
+			{isEditing && (
+				<Modal handleClose={() => setIsEditing(false)}>
+					<PlayerForm
+						handleSubmit={async (player: Player) => {
+							await updatePlayer(player.id, player);
+							setIsEditing(false);
+						}}
+						player={editedPlayer}
+					/>
 				</Modal>
 			)}
 		</div>

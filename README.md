@@ -1,28 +1,24 @@
 # Players-Manager
 
-## Important:
+An application to see all available players, and manage them.
 
-In order to be able to run the application, create an '.env' file in the root folder with the following text:
+## Built with:
 
-```
-DATABASE_URL = URL
-```
-
-The url is already waiting for you (Idan / Dima) in a DM via Slack (From Yuval Ron).
+React (Typescript), Express (Typescript), PostgreSQL
 
 ---
 
-## Heroku
+## Heroku Deployment
 
 https://players-manager.herokuapp.com/
 
 ---
 
-## Notes:
+## Run Locally:
 
-To run locally:
-
-```javascript
-npm ci
-npm run dev
-```
+1. create an '.env' file in the "backend" folder with the following text: `DATABASE_URL = URL`  
+   The url is already waiting for you (Idan / Dima) in a DM via Slack (From Yuval Ron).
+2. `npm ci` in the backend folder
+3. `npm ci` in the frontend folder
+4. `npm start` in the backend folder
+5. `npm start` in the frontend folder

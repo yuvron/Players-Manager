@@ -5,6 +5,7 @@ interface FromItemProps {
 	parentOnChange: (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => void;
 	name: string;
 	labelText: string;
+	initialValue?: string | number;
 	required?: boolean;
 	type?: string;
 	min?: number;
@@ -16,11 +17,11 @@ interface FromItemProps {
 }
 
 interface FormItemState {
-	value: string;
+	value: string | number;
 }
 
 class FormItem extends Component<FromItemProps> {
-	state: FormItemState = { value: "" };
+	state: FormItemState = { value: this.props.initialValue || "" };
 
 	onChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ value: e.target.value.trim() });

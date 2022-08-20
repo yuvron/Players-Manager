@@ -1,11 +1,15 @@
 import "./PlayersTable.scss";
 import Loader from "../Loader/Loader";
 import ActionButtons from "../ActionButtons/ActionButtons";
-import usePlayers from "../../hooks/usePlayers";
+import { Player } from "../../api/players";
 
-const PlayersTable: React.FC = () => {
-	const [players, deletePlayer] = usePlayers();
+interface PlayersTableProps {
+	players: Player[];
+	handleEdit: (player: Player) => void;
+	handleDelete: (id: number) => void;
+}
 
+const PlayersTable: React.FC<PlayersTableProps> = ({ players, handleEdit, handleDelete }) => {
 	const renderPlayers = () => {
 		return players.map((player) => {
 			return (
@@ -21,7 +25,7 @@ const PlayersTable: React.FC = () => {
 						);
 					})}
 					<td>
-						<ActionButtons onDelete={() => deletePlayer(player.id)} />
+						<ActionButtons onEdit={() => handleEdit(player)} onDelete={() => handleDelete(player.id)} />
 					</td>
 				</tr>
 			);
@@ -42,7 +46,13 @@ const PlayersTable: React.FC = () => {
 		} else return [];
 	};
 
-	if (players.length === 0) return <Loader />;
+	if (players.length === 0) {
+		return (
+			<div className="users-table">
+				<Loader />;
+			</div>
+		);
+	}
 	return (
 		<div className="users-table">
 			<table>

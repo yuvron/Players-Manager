@@ -28,12 +28,26 @@ export async function deletePlayerById(id: number): Promise<any> {
 	return (await client.query(sql, [id])).rows[0];
 }
 
-export async function createPlayer({ firstName, lastName, age, nationality, club, position, wage, value, history, agent }): Promise<any> {
+export async function createPlayer({ first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id }): Promise<any> {
 	const sql = `INSERT INTO players
 	(first_name,last_name,age,nationality,club,position,wage,value,clubs_history,agent_id)
 	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 	RETURNING *`;
-	return (await client.query(sql, [firstName, lastName, age, nationality, club, position, wage, value, history, agent])).rows[0];
+	return (await client.query(sql, [first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id])).rows[0];
+}
+
+export async function updatePlayer(
+	id: number,
+	{ first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id }
+): Promise<any> {
+	const sql = `UPDATE players
+	SET first_name = $1, last_name = $2, age = $3,
+	nationality = $4, club = $5, position = $6,
+	wage = $7, value = $8, clubs_history = $9,
+	agent_id = $10
+	WHERE id = $11
+	RETURNING *`;
+	return (await client.query(sql, [first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id, id])).rows[0];
 }
 
 export async function getAllAgents(): Promise<any[]> {
