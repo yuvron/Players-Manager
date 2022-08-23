@@ -17,9 +17,9 @@
 }
 
 @mixin page {
-	@include size(95%, 100vh);
+	@include size(95%, 93vh);
 	@include flex(column, flex-start, flex-start);
 	margin: 0 auto;
-	padding: 3em 0;
+	padding: 1.5em 0 2.5em 0;
 	row-gap: 20px;
 }
