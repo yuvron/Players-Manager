@@ -1,20 +1,20 @@
 import { useState } from "react";
-import PlayersTable from "./components/PlayersTable/PlayersTable";
-import AddPlayerButton from "./components/AddPlayerButton/AddPlayerButton";
-import Modal from "./components/Modal/Modal";
-import PlayerForm from "./components/PlayerForm/PlayerForm";
-import { Player } from "./api/players";
-import usePlayers from "./hooks/usePlayers";
-import "./App.scss";
+import PlayersTable from "../../components/PlayersTable/PlayersTable";
+import AddPlayerButton from "../../components/AddPlayerButton/AddPlayerButton";
+import Modal from "../../components/Modal/Modal";
+import PlayerForm from "../../components/PlayerForm/PlayerForm";
+import { Player } from "../../api/players";
+import usePlayers from "../../hooks/usePlayers";
+import "./PlayersPage.scss";
 
-const App: React.FC = () => {
+const PlayersPage: React.FC = () => {
 	const [players, createPlayer, updatePlayer, deletePlayer] = usePlayers();
 	const [isAdding, setIsAdding] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedPlayer, setEditedPlayer] = useState<Player | undefined>(undefined);
 
 	return (
-		<div className="app">
+		<div className="players-page">
 			<AddPlayerButton handleClick={() => setIsAdding(true)} />
 			<PlayersTable
 				players={players}
@@ -49,4 +49,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default PlayersPage;

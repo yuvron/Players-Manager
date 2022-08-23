@@ -1,4 +1,5 @@
 @import "variables";
+@import "utilities";
 
 @mixin button {
 	font-size: 1.3rem;
@@ -13,4 +14,12 @@
 		color: white;
 		background-color: $pretty-blue;
 	}
+}
+
+@mixin page {
+	@include size(95%, 100vh);
+	@include flex(column, flex-start, flex-start);
+	margin: 0 auto;
+	padding: 3em 0;
+	row-gap: 20px;
 }

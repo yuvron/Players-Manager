@@ -1,9 +1,0 @@
-@import "./style-partials//utilities";
-
-.app {
-	@include size(95%, 100vh);
-	@include flex(column, flex-start, flex-start);
-	margin: 0 auto;
-	padding: 3em 0;
-	row-gap: 20px;
-}

@@ -1,0 +1,6 @@
+@import "../../style-partials//utilities";
+@import "../../style-partials/presets";
+
+.players-page {
+	@include page;
+}
