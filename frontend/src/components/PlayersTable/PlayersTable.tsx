@@ -2,14 +2,15 @@ import "./PlayersTable.scss";
 import Loader from "../Loader/Loader";
 import ActionButtons from "../ActionButtons/ActionButtons";
 import { Player } from "../../api/players";
+import { usePlayers } from "../../context/PlayersContext";
 
 interface PlayersTableProps {
-	players: Player[];
 	handleEdit: (player: Player) => void;
-	handleDelete: (id: number) => void;
 }
 
-const PlayersTable: React.FC<PlayersTableProps> = ({ players, handleEdit, handleDelete }) => {
+const PlayersTable: React.FC<PlayersTableProps> = ({ handleEdit }) => {
+	const { players, deletePlayer } = usePlayers();
+
 	const renderPlayers = () => {
 		return players.map((player) => {
 			return (
@@ -25,7 +26,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players, handleEdit, handle
 						);
 					})}
 					<td>
-						<ActionButtons onEdit={() => handleEdit(player)} onDelete={() => handleDelete(player.id)} />
+						<ActionButtons onEdit={() => handleEdit(player)} onDelete={() => deletePlayer(player.id)} />
 					</td>
 				</tr>
 			);
@@ -33,7 +34,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players, handleEdit, handle
 	};
 
 	const renderHeaders = () => {
-		if (players[0]) {
+		if (players.length > 0) {
 			return (
 				<>
 					{Object.keys(players[0]).map((key) => {
@@ -46,21 +47,18 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players, handleEdit, handle
 		} else return [];
 	};
 
-	if (players.length === 0) {
-		return (
-			<div className="users-table">
-				<Loader />;
-			</div>
-		);
-	}
 	return (
 		<div className="users-table">
-			<table>
-				<thead>
-					<tr>{renderHeaders()}</tr>
-				</thead>
-				<tbody>{renderPlayers()}</tbody>
-			</table>
+			{players.length === 0 ? (
+				<Loader />
+			) : (
+				<table>
+					<thead>
+						<tr>{renderHeaders()}</tr>
+					</thead>
+					<tbody>{renderPlayers()}</tbody>
+				</table>
+			)}
 		</div>
 	);
 };
