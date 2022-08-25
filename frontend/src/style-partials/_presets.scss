@@ -2,7 +2,6 @@
 @import "utilities";
 
 @mixin button {
-	font-size: 1.3rem;
 	font-weight: bold;
 	padding: 0.6em 0.9em;
 	background-color: white;
@@ -17,7 +16,7 @@
 }
 
 @mixin page {
-	@include size(95%, 93vh);
+	@include size(95%, calc(100vh - $navbar-height));
 	@include flex(column, flex-start, flex-start);
 	margin: 0 auto;
 	padding: 1.5em 0 2.5em 0;

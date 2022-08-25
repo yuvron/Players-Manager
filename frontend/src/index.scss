@@ -5,18 +5,3 @@
 body {
 	background-color: $very_light_gray;
 }
-
-nav {
-	font-size: 2rem;
-	height: 7vh;
-	background-color: rgba(0, 0, 0, 0.15);
-	@include flex(row, center, center);
-	& > a {
-		margin: 0 1em;
-		padding: 0.15em;
-		border-bottom: 3px solid transparent;
-		&.active {
-			border-bottom: 3px solid black;
-		}
-	}
-}

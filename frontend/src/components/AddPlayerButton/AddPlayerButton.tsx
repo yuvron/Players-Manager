@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./AddPlayerButton.scss";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 interface AddPlayerButtonProps {
 	handleClick: () => void;
@@ -10,7 +11,8 @@ class AddPlayerButton extends Component<AddPlayerButtonProps> {
 		return (
 			<>
 				<button onClick={this.props.handleClick} className="add-player-button">
-					<i className="fa-solid fa-circle-plus"></i> Add Player
+					<AiFillPlusCircle />
+					Add Player
 				</button>
 			</>
 		);

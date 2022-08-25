@@ -1,5 +1,12 @@
+@import "../../style-partials/utilities";
 @import "../../style-partials/presets";
 
 .add-player-button {
+	font-size: 1.1rem;
 	@include button;
+	@include flex(row, center, center);
+	svg {
+		margin-right: 0.3em;
+		font-size: 1.2em;
+	}
 }

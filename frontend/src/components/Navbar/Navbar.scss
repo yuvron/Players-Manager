@@ -1,0 +1,55 @@
+@import "../../style-partials/utilities";
+@import "../../style-partials/variables";
+
+.navbar {
+	@include size(100%, $navbar-height);
+	font-size: 2rem;
+	background-color: rgba(0, 0, 0, 0.15);
+	padding: 0 1em;
+	box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+	.links {
+		@include flex(row, flex-start, center);
+		@include size(230px, 100%);
+		column-gap: 10px;
+		& > a {
+			i {
+				width: 52px;
+				padding: 0 10px;
+			}
+			font-weight: bold;
+			@include flex(row, flex-start, center);
+			position: relative;
+			width: 52px;
+			padding: 0.25em 0;
+			transition: all 0.5s;
+			border-radius: 6px;
+			overflow: hidden;
+			// &::before {
+			// 	content: "";
+			// 	position: absolute;
+			// 	height: 2px;
+			// 	bottom: 0px;
+			// 	width: 0;
+			// 	left: 0;
+			// 	background-color: black;
+			// 	transition: all 0.3s ease;
+			// }
+			span {
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+			&:hover {
+				// &::before {
+				// 	width: 100%;
+				// }
+			}
+			&.active {
+				width: calc(100% - 52px);
+				background-color: rgba(255, 255, 255, 0.3);
+				span {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

@@ -1,4 +1,6 @@
 import "./ActionButtons.scss";
+import { FaEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 
 interface ActionButtonsProps {
 	onEdit: () => void;
@@ -10,10 +12,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onDelete, onEdit }) => {
 		<td>
 			<div className="action-buttons">
 				<button onClick={onEdit}>
-					<i className="edit-button fa-solid fa-pen-to-square"></i>
+					<FaEdit className="edit-button" />
 				</button>
 				<button onClick={onDelete}>
-					<i className="delete-button fa-solid fa-trash-can"></i>
+					<FaTrashAlt className="delete-button" />
 				</button>
 			</div>
 		</td>
