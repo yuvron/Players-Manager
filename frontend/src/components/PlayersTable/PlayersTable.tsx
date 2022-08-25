@@ -3,6 +3,7 @@ import Loader from "../Loader/Loader";
 import ActionButtons from "../ActionButtons/ActionButtons";
 import { Player } from "../../api/players";
 import { usePlayers } from "../../context/PlayersContext";
+import PlayerData from "../PlayerData/PlayerData";
 
 interface PlayersTableProps {
 	handleEdit: (player: Player) => void;
@@ -15,19 +16,8 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ handleEdit }) => {
 		return players.map((player) => {
 			return (
 				<tr key={player.id}>
-					{Object.entries(player).map(([key, value]) => {
-						let formattedValue = value;
-						if (typeof value === "number") formattedValue = value.toLocaleString();
-						if (Array.isArray(value)) formattedValue = value.join(", ");
-						return (
-							<td key={key} className={`user-${key}`}>
-								{formattedValue}
-							</td>
-						);
-					})}
-					<td>
-						<ActionButtons onEdit={() => handleEdit(player)} onDelete={() => deletePlayer(player.id)} />
-					</td>
+					<PlayerData player={player} />
+					<ActionButtons onEdit={() => handleEdit(player)} onDelete={() => deletePlayer(player.id)} />
 				</tr>
 			);
 		});

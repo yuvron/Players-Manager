@@ -41,13 +41,13 @@
 	td {
 		padding: 1.5em 0.7em;
 	}
-	.user-wage::after,
-	.user-value::after {
+	.player-wage::after,
+	.player-value::after {
 		content: "$";
 	}
-	.user-first_name,
-	.user-last_name,
-	.user-club {
+	.player-first_name,
+	.player-last_name,
+	.player-club {
 		font-weight: bold;
 	}
 	&::-webkit-scrollbar {
