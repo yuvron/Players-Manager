@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PlayersTable from "../../components/PlayersTable/PlayersTable";
-import AddPlayerButton from "../../components/AddPlayerButton/AddPlayerButton";
+import DataTable from "../../components/DataTable/DataTable";
+import AddButton from "../../components/AddButton/AddButton";
 import Modal from "../../components/Modal/Modal";
 import PlayerForm from "../../components/PlayerForm/PlayerForm";
 import { Player } from "../../api/players";
@@ -14,8 +14,8 @@ const PlayersPage: React.FC = () => {
 
 	return (
 		<div className="players-page">
-			<AddPlayerButton handleClick={() => setIsAdding(true)} />
-			<PlayersTable handleEdit={setEditedPlayer} />
+			<AddButton text="Add Player" handleClick={() => setIsAdding(true)} />
+			<DataTable dataType="players" handleEdit={setEditedPlayer} />
 			{isAdding && (
 				<Modal handleClose={() => setIsAdding(false)}>
 					<PlayerForm

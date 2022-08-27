@@ -23,7 +23,7 @@ export async function getPlayerById(id: number): Promise<any> {
 	return (await client.query(sql, [id])).rows[0];
 }
 
-export async function deletePlayerById(id: number): Promise<any> {
+export async function deletePlayer(id: number): Promise<any> {
 	const sql = "DELETE FROM players WHERE id = $1 RETURNING *";
 	return (await client.query(sql, [id])).rows[0];
 }
@@ -36,10 +36,7 @@ export async function createPlayer({ first_name, last_name, age, nationality, cl
 	return (await client.query(sql, [first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id])).rows[0];
 }
 
-export async function updatePlayer(
-	id: number,
-	{ first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id }
-): Promise<any> {
+export async function updatePlayer(id: number, { first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id }): Promise<any> {
 	const sql = `UPDATE players
 	SET first_name = $1, last_name = $2, age = $3,
 	nationality = $4, club = $5, position = $6,

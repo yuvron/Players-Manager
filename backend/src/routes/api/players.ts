@@ -42,7 +42,18 @@ router.get("/:id", (req: Request, res: Response) => {
 
 // Create a new player
 router.post("/", (req: Request, res: Response) => {
-	const validPlayerKeys = ["first_name", "last_name", "age", "nationality", "club", "position", "wage", "value", "clubs_history", "agent_id"];
+	const validPlayerKeys = [
+		"first_name",
+		"last_name",
+		"age",
+		"nationality",
+		"club",
+		"position",
+		"wage",
+		"value",
+		"clubs_history",
+		"agent_id",
+	];
 	for (const key of validPlayerKeys) {
 		if (!(key in req.body)) {
 			res.status(400).send(`${key} missing in request body`);
@@ -68,7 +79,18 @@ router.post("/", (req: Request, res: Response) => {
 
 // Update a player by id
 router.put("/:id", (req: Request, res: Response) => {
-	const validPlayerKeys = ["first_name", "last_name", "age", "nationality", "club", "position", "wage", "value", "clubs_history", "agent_id"];
+	const validPlayerKeys = [
+		"first_name",
+		"last_name",
+		"age",
+		"nationality",
+		"club",
+		"position",
+		"wage",
+		"value",
+		"clubs_history",
+		"agent_id",
+	];
 	const id = +req.params.id;
 	for (const key of validPlayerKeys) {
 		if (!(key in req.body)) {
@@ -97,7 +119,7 @@ router.put("/:id", (req: Request, res: Response) => {
 // Deletes a player by id
 router.delete("/:id", (req: Request, res: Response) => {
 	const id = +req.params.id;
-	db.deletePlayerById(id)
+	db.deletePlayer(id)
 		.then((player) => {
 			if (player) res.json(player);
 			else res.sendStatus(404);

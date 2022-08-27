@@ -1,7 +1,7 @@
 @import "../../style-partials/utilities";
 @import "../../style-partials/variables";
 
-.users-table {
+.data-table {
 	@include size(100%, 100%);
 	font-size: 1.05rem;
 	background-color: white;
@@ -41,14 +41,18 @@
 	td {
 		padding: 1.5em 0.7em;
 	}
-	.player-wage::after,
-	.player-value::after {
+	.data-wage::after,
+	.data-value::after {
 		content: "$";
 	}
-	.player-first_name,
-	.player-last_name,
-	.player-club {
+	.data-first_name,
+	.data-last_name,
+	.data-name,
+	.data-club {
 		font-weight: bold;
+	}
+	.data-email {
+		text-transform: lowercase;
 	}
 	&::-webkit-scrollbar {
 		width: 8px;

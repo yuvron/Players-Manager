@@ -13,7 +13,8 @@ React (Typescript), Express (Typescript), PostgreSQL
 ### IMPORTANT:
 
 Don't delete any of the first 50 players, they were not easy to generate :)  
-If you want to try the delete method, create a player and then delete him
+If you want to try the delete method, create a player and then delete him.
+Agents table is currently in read-only mode, function yet to be implemented.
 
 https://players-manager.herokuapp.com/
 

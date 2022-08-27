@@ -1,7 +1,7 @@
 @import "../../style-partials/utilities";
 @import "../../style-partials/presets";
 
-.add-player-button {
+.add-button {
 	font-size: 1.1rem;
 	@include button;
 	@include flex(row, center, center);
