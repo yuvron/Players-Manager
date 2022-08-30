@@ -1,6 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
-import playersRouter from "./api/players";
-import agentsRouter from "./api/agents";
+import playersRouter from "./players";
+import agentsRouter from "./agents";
+import bodyValidator from "../middleware/bodyValidator";
+import idValidator from "../middleware/idValidator";
 
 const router = express.Router();
 
@@ -10,10 +12,16 @@ router.use("*", (req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-// Route to api/players endpoints
+// Validates all endpoints accepting id as a parameter
+router.use(["/players/:id", "/agents/:id"], idValidator);
+
+// Validates the body in POST and PUT requests
+router.use(["/players", "/agents"], bodyValidator);
+
+// Route to /api/players endpoints
 router.use("/players", playersRouter);
 
-// Route to api/agents endpoints
+// Route to /api/agents endpoints
 router.use("/agents", agentsRouter);
 
 export default router;

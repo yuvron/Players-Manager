@@ -1,15 +1,29 @@
-import axios, { AxiosError } from "axios";
-import { errorHandler } from "./errorHandler";
+import axios from "axios";
+import { responseHandler } from "./handlers";
 
 export interface Agent {
 	id: number;
+	name: string;
+	email: string;
+	phone: string;
 }
 
 export const apiGetAgents = async () => {
-	try {
-		const { data } = await axios.get("/api/agents");
-		return data;
-	} catch (e) {
-		errorHandler(e as AxiosError);
-	}
+	const request = axios.get("/api/agents");
+	return responseHandler(request);
+};
+
+export const apiCreateAgent = async (agent: Agent) => {
+	const request = axios.post("/api/agents", { ...agent });
+	return responseHandler(request);
+};
+
+export const apiUpdateAgent = async (id: number, agent: Agent) => {
+	const request = axios.put(`/api/agents/${id}`, { ...agent });
+	return responseHandler(request);
+};
+
+export const apiDeleteAgent = async (id: number) => {
+	const request = axios.delete(`/api/agents/${id}`);
+	return responseHandler(request);
 };

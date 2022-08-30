@@ -3,7 +3,7 @@ dotenv.config();
 import path from "path";
 import express, { Request, Response } from "express";
 import { json } from "body-parser";
-import * as db from "./database/database";
+import * as db from "./database/controller";
 import apiRouter from "./routes/api";
 
 const PORT = +process.env.PORT || 5000;

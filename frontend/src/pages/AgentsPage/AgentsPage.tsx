@@ -5,6 +5,7 @@ import DataTable from "../../components/DataTable/DataTable";
 import AddButton from "../../components/AddButton/AddButton";
 import { Agent } from "../../api/agents";
 import Modal from "../../components/Modal/Modal";
+import AgentForm from "../../components/AgentForm/AgentForm";
 
 const AgentsPage: React.FC = () => {
 	const { createAgent, updateAgent } = useAgents();
@@ -17,25 +18,23 @@ const AgentsPage: React.FC = () => {
 			<DataTable dataType="agents" handleEdit={setEditedAgent} />
 			{isAdding && (
 				<Modal handleClose={() => setIsAdding(false)}>
-					{/* <PlayerForm
-						handleSubmit={async (player: Player) => {
-							await createPlayer(player);
+					<AgentForm
+						handleSubmit={async (agent: Agent) => {
+							await createAgent(agent);
 							setIsAdding(false);
 						}}
-					/> */}
-					Add an agent
+					/>
 				</Modal>
 			)}
 			{editedAgent && (
 				<Modal handleClose={() => setEditedAgent(undefined)}>
-					{/* <PlayerForm
-						handleSubmit={async (player: Player) => {
-							await updatePlayer(player.id, player);
-							setEditedPlayer(undefined);
+					<AgentForm
+						handleSubmit={async (agent: Agent) => {
+							await updateAgent(agent.id, agent);
+							setEditedAgent(undefined);
 						}}
-						player={editedPlayer}
-					/> */}
-					Edit an agent
+						agent={editedAgent}
+					/>
 				</Modal>
 			)}
 		</div>

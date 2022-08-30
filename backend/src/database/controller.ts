@@ -56,3 +56,24 @@ export async function getAgentById(id: number): Promise<any> {
 	const sql = "SELECT * FROM agents WHERE id = $1";
 	return (await client.query(sql, [id])).rows[0];
 }
+
+export async function deleteAgent(id: number): Promise<any> {
+	const sql = "DELETE FROM agents WHERE id = $1 RETURNING *";
+	return (await client.query(sql, [id])).rows[0];
+}
+
+export async function createAgent({ name, email, phone }): Promise<any> {
+	const sql = `INSERT INTO agents
+	(name, email, phone)
+	VALUES ($1, $2, $3)
+	RETURNING *`;
+	return (await client.query(sql, [name, email, phone])).rows[0];
+}
+
+export async function updateAgent(id: number, { name, email, phone }): Promise<any> {
+	const sql = `UPDATE agents
+	SET name = $1, email = $2, phone = $3
+	WHERE id = $4
+	RETURNING *`;
+	return (await client.query(sql, [name, email, phone, id])).rows[0];
+}

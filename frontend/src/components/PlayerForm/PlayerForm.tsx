@@ -3,15 +3,8 @@ import "./PlayerForm.scss";
 import POSITIONS from "../../constants/positions";
 import FormItem from "../FormItem/FormItem";
 import Loader from "../Loader/Loader";
-import { apiGetAgents } from "../../api/agents";
+import { Agent, apiGetAgents } from "../../api/agents";
 import { Player } from "../../api/players";
-
-interface Agent {
-	id: number;
-	name: string;
-	email: string;
-	phone: string;
-}
 
 interface PlayerFormProps {
 	handleSubmit: (player: Player) => Promise<void>;
@@ -99,14 +92,7 @@ class PlayerForm extends Component<PlayerFormProps> {
 					<FormItem initialValue={first_name} name="first_name" parentOnChange={this.onFormItemChange} labelText="First Name" required={true} minLength={2} />
 					<FormItem initialValue={last_name} name="last_name" parentOnChange={this.onFormItemChange} labelText="Last Name" required={true} minLength={2} />
 					<FormItem initialValue={age} name="age" parentOnChange={this.onFormItemChange} labelText="Age" type="number" required={true} min={17} max={39} />
-					<FormItem
-						initialValue={nationality}
-						name="nationality"
-						parentOnChange={this.onFormItemChange}
-						labelText="Nationality"
-						required={true}
-						minLength={3}
-					/>
+					<FormItem initialValue={nationality} name="nationality" parentOnChange={this.onFormItemChange} labelText="Nationality" required={true} minLength={3} />
 					<FormItem initialValue={club} name="club" parentOnChange={this.onFormItemChange} labelText="Club" required={true} minLength={3} />
 					<FormItem
 						initialValue={position}
@@ -121,34 +107,9 @@ class PlayerForm extends Component<PlayerFormProps> {
 							</option>
 						))}
 					/>
-					<FormItem
-						initialValue={wage}
-						name="wage"
-						parentOnChange={this.onFormItemChange}
-						labelText="Wage"
-						type="number"
-						required={true}
-						min={10000}
-						max={2000000}
-					/>
-					<FormItem
-						initialValue={value}
-						name="value"
-						parentOnChange={this.onFormItemChange}
-						labelText="Value"
-						type="number"
-						required={true}
-						min={100000}
-						max={200000000}
-					/>
-					<FormItem
-						initialValue={clubs_history}
-						name="clubs_history"
-						parentOnChange={this.onFormItemChange}
-						labelText="Clubs History"
-						required={true}
-						minLength={3}
-					/>
+					<FormItem initialValue={wage} name="wage" parentOnChange={this.onFormItemChange} labelText="Wage" type="number" required={true} min={10000} max={2000000} />
+					<FormItem initialValue={value} name="value" parentOnChange={this.onFormItemChange} labelText="Value" type="number" required={true} min={100000} max={200000000} />
+					<FormItem initialValue={clubs_history} name="clubs_history" parentOnChange={this.onFormItemChange} labelText="Clubs History" required={true} minLength={3} />
 					<FormItem
 						initialValue={agent_id}
 						name="agent_id"

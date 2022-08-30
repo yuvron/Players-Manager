@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import { Agent, apiGetAgents } from "../api/agents";
+import { Agent, apiGetAgents, apiCreateAgent, apiUpdateAgent, apiDeleteAgent } from "../api/agents";
 
 interface AgentContextState {
 	agents: Agent[];
@@ -27,28 +27,24 @@ const AgentsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 	}, []);
 
 	const createAgent = async (agent: Agent) => {
-		// const newAgent = await apiCreateAgent(agent);
-		// setAgents([...agents, newAgent]);
+		const newAgent = await apiCreateAgent(agent);
+		setAgents([...agents, newAgent]);
 	};
 
 	const updateAgent = async (id: number, agent: Agent) => {
-		// const updatedAgent = await apiUpdateAgent(id, agent);
-		// const index = agents.indexOf(agents.find((a) => a.id === id)!);
-		// const agentsCopy = [...agents];
-		// agentsCopy.splice(index, 1, updatedAgent);
-		// setAgents(agentsCopy);
+		const updatedAgent = await apiUpdateAgent(id, agent);
+		const index = agents.indexOf(agents.find((a) => a.id === id)!);
+		const agentsCopy = [...agents];
+		agentsCopy.splice(index, 1, updatedAgent);
+		setAgents(agentsCopy);
 	};
 
 	const deleteAgent = async (id: number) => {
-		// await apiDeleteAgent(id);
-		// setAgents(agents.filter((a) => a.id !== id));
+		await apiDeleteAgent(id);
+		setAgents(agents.filter((a) => a.id !== id));
 	};
 
-	return (
-		<AgentsContext.Provider value={{ agents, createAgent, updateAgent, deleteAgent }}>
-			{children}
-		</AgentsContext.Provider>
-	);
+	return <AgentsContext.Provider value={{ agents, createAgent, updateAgent, deleteAgent }}>{children}</AgentsContext.Provider>;
 };
 
 export default AgentsProvider;

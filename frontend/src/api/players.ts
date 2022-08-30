@@ -1,5 +1,5 @@
-import axios, { AxiosError } from "axios";
-import { errorHandler } from "./errorHandler";
+import axios from "axios";
+import { responseHandler } from "./handlers";
 
 export interface Player {
 	id: number;
@@ -16,37 +16,21 @@ export interface Player {
 }
 
 export const apiGetPlayers = async () => {
-	try {
-		const { data } = await axios.get("/api/players");
-		return data;
-	} catch (e) {
-		errorHandler(e as AxiosError);
-	}
+	const request = axios.get("/api/players");
+	return responseHandler(request);
 };
 
 export const apiCreatePlayer = async (player: Player) => {
-	try {
-		const { data } = await axios.post("/api/players", { ...player });
-		return data;
-	} catch (e) {
-		errorHandler(e as AxiosError);
-	}
+	const request = axios.post("/api/players", { ...player });
+	return responseHandler(request);
 };
 
 export const apiUpdatePlayer = async (id: number, player: Player) => {
-	try {
-		const { data } = await axios.put(`/api/players/${id}`, { ...player });
-		return data;
-	} catch (e) {
-		errorHandler(e as AxiosError);
-	}
+	const request = axios.put(`/api/players/${id}`, { ...player });
+	return responseHandler(request);
 };
 
 export const apiDeletePlayer = async (id: number) => {
-	try {
-		const { data } = await axios.delete(`/api/players/${id}`);
-		return data;
-	} catch (e) {
-		errorHandler(e as AxiosError);
-	}
+	const request = axios.delete(`/api/players/${id}`);
+	return responseHandler(request);
 };
