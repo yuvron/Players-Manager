@@ -1,7 +1,6 @@
 import { Component } from "react";
 import "./PlayerForm.scss";
 import POSITIONS from "../../constants/positions";
-import FormItem from "../FormItem/FormItem";
 import Loader from "../Loader/Loader";
 import { Agent, apiGetAgents } from "../../api/agents";
 import { Player } from "../../api/players";
@@ -78,51 +77,69 @@ class PlayerForm extends Component<PlayerFormProps> {
 		}
 	};
 
-	onFormItemChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+	onInputChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ [e.target.name]: e.target.value.trim() });
 	};
 
 	render() {
 		if (this.state.isLoading) return <Loader />;
-		const { first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id } = this.state;
+		const { first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id, agents } = this.state;
 		return (
-			<div className="add-player-form">
+			<div className="player-form">
 				<h3>{this.props.player ? `Edit Player #${this.props.player.id}` : "New Player"}</h3>
 				<form onSubmit={this.onFormSubmit}>
-					<FormItem initialValue={first_name} name="first_name" parentOnChange={this.onFormItemChange} labelText="First Name" required={true} minLength={2} />
-					<FormItem initialValue={last_name} name="last_name" parentOnChange={this.onFormItemChange} labelText="Last Name" required={true} minLength={2} />
-					<FormItem initialValue={age} name="age" parentOnChange={this.onFormItemChange} labelText="Age" type="number" required={true} min={17} max={39} />
-					<FormItem initialValue={nationality} name="nationality" parentOnChange={this.onFormItemChange} labelText="Nationality" required={true} minLength={3} />
-					<FormItem initialValue={club} name="club" parentOnChange={this.onFormItemChange} labelText="Club" required={true} minLength={3} />
-					<FormItem
-						initialValue={position}
-						name="position"
-						parentOnChange={this.onFormItemChange}
-						isSelect={true}
-						labelText="Position"
-						required={true}
-						selectOptions={POSITIONS.map((pos) => (
-							<option key={pos} value={pos}>
-								{pos}
-							</option>
-						))}
-					/>
-					<FormItem initialValue={wage} name="wage" parentOnChange={this.onFormItemChange} labelText="Wage" type="number" required={true} min={10000} max={2000000} />
-					<FormItem initialValue={value} name="value" parentOnChange={this.onFormItemChange} labelText="Value" type="number" required={true} min={100000} max={200000000} />
-					<FormItem initialValue={clubs_history} name="clubs_history" parentOnChange={this.onFormItemChange} labelText="Clubs History" required={true} minLength={3} />
-					<FormItem
-						initialValue={agent_id}
-						name="agent_id"
-						parentOnChange={this.onFormItemChange}
-						isSelect={true}
-						labelText="Agent"
-						required={true}
-						selectOptions={this.state.agents.map((agent) => (
-							<option key={agent.id} value={agent.id}>
-								{`${agent.name} (${agent.id})`}
-							</option>
-						))}
-					/>
+					<div>
+						<label htmlFor="first_name">First Name</label>
+						<input name="first_name" value={first_name} onChange={this.onInputChange} required minLength={2} />
+					</div>
+					<div>
+						<label htmlFor="last_name">Last Name</label>
+						<input name="last_name" value={last_name} onChange={this.onInputChange} required minLength={2} />
+					</div>
+					<div>
+						<label htmlFor="age">Age</label>
+						<input name="age" type="number" value={age} onChange={this.onInputChange} required min={17} max={39} />
+					</div>
+					<div>
+						<label htmlFor="nationality">Nationality</label>
+						<input name="nationality" value={nationality} onChange={this.onInputChange} required minLength={3} />
+					</div>
+					<div>
+						<label htmlFor="club">Club</label>
+						<input name="club" value={club} onChange={this.onInputChange} required minLength={3} />
+					</div>
+					<div>
+						<label htmlFor="position">Position</label>
+						<select name="position" value={position} onChange={this.onInputChange} required>
+							{POSITIONS.map((pos) => (
+								<option key={pos} value={pos}>
+									{pos}
+								</option>
+							))}
+						</select>
+					</div>
+					<div>
+						<label htmlFor="wage">Wage</label>
+						<input name="wage" type="number" value={wage} onChange={this.onInputChange} required min={10000} max={2000000} />
+					</div>
+					<div>
+						<label htmlFor="value">Value</label>
+						<input name="value" type="number" value={value} onChange={this.onInputChange} required min={100000} max={200000000} />
+					</div>
+					<div>
+						<label htmlFor="clubs_history">Clubs History (separate with commas)</label>
+						<input name="clubs_history" value={clubs_history} onChange={this.onInputChange} required minLength={3} />
+					</div>
+					<div>
+						<label htmlFor="agent_id">Agent</label>
+						<select name="agent_id" value={agent_id} onChange={this.onInputChange} required>
+							{agents.map((agent) => (
+								<option key={agent.id} value={agent.id}>
+									{`${agent.name} (${agent.id})`}
+								</option>
+							))}
+						</select>
+					</div>
 					<button type="submit">{this.props.player ? "Edit player" : "Add player"}</button>
 				</form>
 			</div>

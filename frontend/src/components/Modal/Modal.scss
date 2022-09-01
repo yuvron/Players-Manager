@@ -25,4 +25,12 @@
 			color: black;
 		}
 	}
+	@media only screen and (max-width: 900px) {
+		width: 85%;
+		padding: 1.1em;
+	}
+	@media only screen and (max-width: 500px) {
+		width: 92%;
+		padding: 0.9em;
+	}
 }

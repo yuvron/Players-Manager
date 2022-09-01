@@ -1,20 +1,21 @@
 # Players-Manager
 
-An application to see all available players, and manage them.
+CRUD application designed to manage a database of football players and their agents.
+
+If you have any kind of feedback, please let me know, I will appreciate it.  
+Feel free to send me an
+<a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=yuvr99@email.com" target="_blank"> email </a>
+or message me on
+<a href="https://www.linkedin.com/in/yuval-ron1/" target="_blank">Linkedin</a>.
 
 ## Built with:
 
-React (Typescript), Express (Typescript), PostgreSQL
+<b>Frontend:</b> React, Typescript, scss  
+<b>Backend:</b> Express, Typescript, PostgreSQL
 
 ---
 
-## Heroku Deployment
-
-### IMPORTANT:
-
-Don't delete any of the first 50 players, they were not easy to generate :)  
-If you want to try the delete method, create a player and then delete him.
-Agents table is currently in read-only mode, function yet to be implemented.
+## Live Application
 
 https://players-manager.herokuapp.com/
 
@@ -22,9 +23,36 @@ https://players-manager.herokuapp.com/
 
 ## Run Locally:
 
-1. create an '.env' file in the "backend" folder with the following text: `DATABASE_URL = URL`  
-   The url is already waiting for you (Idan / Dima) in a DM via Slack (From Yuval Ron).
-2. `npm ci` in the backend folder
-3. `npm ci` in the frontend folder
-4. `npm start` in the backend folder
-5. `npm start` in the frontend folder
+1. In the backend folder, run the following command:  
+   `npm ci`
+2. Create an '.env' file in the backend folder.
+3. Add the following text to the '.env' file you just created:  
+   `DATABASE_URL = URL`  
+   URL should be your own PostgreSQL database's connection string.
+
+4. If you don't want to generate players and clubs for the local db, you can skip this step.  
+   Add the following text to the '.env' file:  
+    `FOOTBALL_API_KEY = KEY`  
+   KEY should be your own football-api key.  
+    You can get one <a href="http://dashboard.api-football.com">here</a>.
+
+5. In the root folder, run the following command:  
+   `node backend/scripts/initdb.js`  
+   Now your database should be ready.
+
+6. In the backend folder, run the following command:  
+   `npm start`  
+   Now your server should be up and running.  
+   <b>Note: all the following steps should be run from a different terminal.</b>
+
+7. In the frontend folder, run the following command:  
+   `npm ci`
+
+8. In the frontend folder, run the following command:  
+   `npm ci`
+
+9. In the frontend folder, run the following command:  
+   `npm start`  
+   If all steps were executed correctly, you should be done.
+
+Enjoy!

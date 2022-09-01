@@ -6,33 +6,49 @@
 	font-size: 2rem;
 	background-color: rgba(0, 0, 0, 0.15);
 	padding: 0 1em;
-	box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
 	.links {
 		@include flex(row, flex-start, center);
 		@include size(230px, 100%);
 		column-gap: 10px;
 		& > a {
-			i {
-				width: 52px;
-				padding: 0 10px;
-			}
 			font-weight: bold;
 			@include flex(row, flex-start, center);
 			position: relative;
-			width: 52px;
+			width: $navbar-icon-width;
 			padding: 0.25em 0;
 			transition: all 0.5s;
 			border-radius: 6px;
 			overflow: hidden;
+			i {
+				width: $navbar-icon-width;
+				padding: 0 10px;
+			}
 			span {
 				opacity: 0;
 				transition: opacity 0.3s;
 			}
 			&.active {
-				width: calc(100% - 52px);
+				width: calc(100% - $navbar-icon-width);
 				background-color: rgba(255, 255, 255, 0.3);
 				span {
 					opacity: 1;
+				}
+			}
+		}
+	}
+	@media only screen and (max-height: 700px) {
+		font-size: 1.5rem;
+		height: $navbar-height-short;
+		.links {
+			width: 180px;
+			& > a {
+				i {
+					width: $navbar-icon-width-short;
+				}
+				width: $navbar-icon-width-short;
+				&.active {
+					width: calc(100% - $navbar-icon-width-short);
 				}
 			}
 		}

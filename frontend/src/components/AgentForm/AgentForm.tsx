@@ -1,6 +1,5 @@
 import { Component } from "react";
 import "./AgentForm.scss";
-import FormItem from "../FormItem/FormItem";
 import Loader from "../Loader/Loader";
 import { Agent } from "../../api/agents";
 
@@ -39,7 +38,7 @@ class AgentForm extends Component<AgentFormProps> {
 		}
 	};
 
-	onFormItemChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+	onInputChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
 		this.setState({ [e.target.name]: e.target.value.trim() });
 	};
 
@@ -47,12 +46,28 @@ class AgentForm extends Component<AgentFormProps> {
 		if (this.state.isLoading) return <Loader />;
 		const { name, email, phone } = this.state;
 		return (
-			<div className="add-player-form">
+			<div className="agent-form">
 				<h3>{this.props.agent ? `Edit Agent #${this.props.agent.id}` : "New Agent"}</h3>
 				<form onSubmit={this.onFormSubmit}>
-					<FormItem initialValue={name} name="name" parentOnChange={this.onFormItemChange} labelText="Name" required={true} minLength={2} />
-					<FormItem initialValue={email} type="email" name="email" parentOnChange={this.onFormItemChange} labelText="Email" required={true} minLength={2} />
-					<FormItem initialValue={phone} name="phone" parentOnChange={this.onFormItemChange} labelText="Phone" required={true} />
+					<div>
+						<label htmlFor="name">Name</label>
+						<input name="name" value={name} onChange={this.onInputChange} type="text" required minLength={2} />
+					</div>
+					<div>
+						<label htmlFor="email">Email</label>
+						<input name="email" value={email} onChange={this.onInputChange} type="email" required />
+					</div>
+					<div>
+						<label htmlFor="phone">Phone (+44-123-456-789)</label>
+						<input
+							name="phone"
+							value={phone}
+							onChange={this.onInputChange}
+							type="tel"
+							required
+							pattern="[+]([0-9]{3}|[0-9]{2})-[0-9]{3}-[0-9]{3}-[0-9]{3}"
+						/>
+					</div>
 					<button type="submit">{this.props.agent ? "Edit agent" : "Add agent"}</button>
 				</form>
 			</div>

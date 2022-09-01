@@ -17,10 +17,12 @@ client.connect().then(async () => {
 		await createAgentsTable();
 		console.log("create players");
 		await createPlayersTable();
-		console.log("insert agents");
-		const ids = await insertAgents();
-		console.log("insert players");
-		await insertPlayers(ids);
+		if (process.env.FOOTBALL_API_KEY) {
+			console.log("insert agents");
+			const ids = await insertAgents();
+			console.log("insert players");
+			await insertPlayers(ids);
+		}
 		client.end();
 	} catch (e) {
 		console.log(e.message);
@@ -79,8 +81,7 @@ async function insertPlayers(ids) {
 	const players = [];
 	for (let i = 0; i < PLAYERS_NUM; i++) players.push(await getPlayer(ids, [...clubs]));
 	playersValues = players.map((player) => Object.values(player));
-	let sql =
-		"INSERT INTO players (first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id) VALUES ";
+	let sql = "INSERT INTO players (first_name, last_name, age, nationality, club, position, wage, value, clubs_history, agent_id) VALUES ";
 	for (let i = 0; i < PLAYERS_NUM; i++) {
 		const offset = i * 10;
 		sql += `($${offset + 1},$${offset + 2},$${offset + 3},$${offset + 4},$${offset + 5},$${offset + 6},

@@ -2,15 +2,23 @@
 @import "../../style-partials/variables";
 
 .action-buttons {
-	@include flex(row, center, center);
+	@include flex(row, space-between, center);
 	font-size: 1.6rem;
 	.edit-button,
 	.delete-button {
-		margin: 0 0.3em;
-		transition: transform 0.2s;
 		color: $pretty-blue;
+		transition: transform 0.2s;
 		&:hover {
 			transform: scale(1.25);
 		}
+	}
+	@media only screen and (max-width: 1000px) {
+		font-size: 1.45rem;
+	}
+	@media only screen and (max-width: 800px) {
+		font-size: 1.25rem;
+	}
+	@media only screen and (max-width: 600px) {
+		font-size: 1rem;
 	}
 }
