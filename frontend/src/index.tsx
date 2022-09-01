@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import PlayersPage from "./pages/PlayersPage/PlayersPage";
 import AgentsPage from "./pages/AgentsPage/AgentsPage";
@@ -29,6 +29,7 @@ root.render(
 						</AgentsProvider>
 					}
 				/>
+				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 		</BrowserRouter>
 	</>

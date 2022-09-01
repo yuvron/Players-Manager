@@ -2,12 +2,12 @@
 @import "../../style-partials/variables";
 
 .action-buttons {
-	@include flex(row, space-evenly, center);
+	@include flex(row, center, center);
 	font-size: 1.6rem;
-	.edit-button,
-	.delete-button {
+	button {
 		color: $pretty-blue;
 		transition: transform 0.2s;
+		margin: 0 0.1em;
 		&:hover {
 			transform: scale(1.25);
 		}
