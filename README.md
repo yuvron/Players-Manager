@@ -17,7 +17,7 @@ or message me on
 
 ## Live Application
 
-https://players-manager.herokuapp.com/
+https://players-manager.herokuapp.com
 
 ---
 
@@ -49,9 +49,6 @@ https://players-manager.herokuapp.com/
    `npm ci`
 
 8. In the frontend folder, run the following command:  
-   `npm ci`
-
-9. In the frontend folder, run the following command:  
    `npm start`  
    If all steps were executed correctly, you should be done.
 
