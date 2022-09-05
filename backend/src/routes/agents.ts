@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import * as db from "../database/controller";
 import idValidator from "../middleware/idValidator";
+import bodyValidator from "../middleware/bodyValidator";
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 // Create a new agent
-router.post("/", (req: Request, res: Response) => {
+router.post("/", bodyValidator, (req: Request, res: Response) => {
 	db.createAgent(req.body)
 		.then((player) => {
 			res.json(player);
@@ -46,7 +47,7 @@ router.post("/", (req: Request, res: Response) => {
 });
 
 // Update a player by id
-router.put("/:id", (req: Request, res: Response) => {
+router.put("/:id", bodyValidator, (req: Request, res: Response) => {
 	const id = +req.params.id;
 	db.updateAgent(id, req.body)
 		.then((agent) => {

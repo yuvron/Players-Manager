@@ -21,15 +21,13 @@ function validator(isPlayer: boolean, body: Object): void {
 }
 
 function bodyValidator(req: Request, res: Response, next: NextFunction): void {
-	if (req.method === "POST" || req.method === "PUT") {
-		try {
-			const isPlayer = req.originalUrl.split("/")[2] === "players";
-			validator(isPlayer, req.body);
-			next();
-		} catch (err) {
-			res.status(400).send(err.message);
-		}
-	} else next();
+	try {
+		const isPlayer = req.originalUrl.split("/")[2] === "players";
+		validator(isPlayer, req.body);
+		next();
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
 }
 
 export default bodyValidator;

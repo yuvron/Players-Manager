@@ -1,7 +1,12 @@
 import express, { Request, Response } from "express";
 import * as db from "../database/controller";
+import idValidator from "../middleware/idValidator";
+import bodyValidator from "../middleware/bodyValidator";
 
 const router = express.Router();
+
+// Validates all endpoints accepting id as a parameter
+router.use("/:id", idValidator);
 
 // Sends all the players
 router.get("/", (req: Request, res: Response) => {
@@ -30,7 +35,7 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 // Create a new player
-router.post("/", (req: Request, res: Response) => {
+router.post("/", bodyValidator, (req: Request, res: Response) => {
 	db.createPlayer(req.body)
 		.then((player) => {
 			res.json(player);
@@ -42,7 +47,7 @@ router.post("/", (req: Request, res: Response) => {
 });
 
 // Update a player by id
-router.put("/:id", (req: Request, res: Response) => {
+router.put("/:id", bodyValidator, (req: Request, res: Response) => {
 	const id = +req.params.id;
 	db.updatePlayer(id, req.body)
 		.then((player) => {
