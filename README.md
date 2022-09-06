@@ -38,7 +38,7 @@ https://players-manager.herokuapp.com
 
    ```console
    npm ci
-   npm run initDb
+   npm run initDb (note: this one might take some time)
    npm start
    ```
 
