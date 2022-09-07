@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import { apiGetPlayers, apiCreatePlayer, apiUpdatePlayer, apiDeletePlayer, Player } from "../api/players";
+import positions from "../constants/positions";
 
 interface PlayersContextState {
 	players: Player[];
 	createPlayer: (player: Player) => Promise<void>;
 	updatePlayer: (id: number, player: Player) => Promise<void>;
 	deletePlayer: (id: number) => Promise<void>;
+	sortPlayers: (sortType: string, sortOrder: number) => void;
 }
 
 const PlayersContext = createContext<PlayersContextState | undefined>(undefined);
@@ -44,11 +46,20 @@ const PlayersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
 		setPlayers(players.filter((p) => p.id !== id));
 	};
 
-	return (
-		<PlayersContext.Provider value={{ players, createPlayer, updatePlayer, deletePlayer }}>
-			{children}
-		</PlayersContext.Provider>
-	);
+	const sortPlayers = (sortType: string, sortOrder: number) => {
+		const sortKey = sortType as keyof Player;
+		const sortedPlayers: Player[] = [...players];
+		sortedPlayers.sort((a: Player, b: Player) => {
+			if (sortKey === "position") {
+				return positions.indexOf(a[sortKey]) > positions.indexOf(b[sortKey]) ? sortOrder : sortOrder * -1;
+			} else {
+				return a[sortKey] > b[sortKey] ? sortOrder : sortOrder * -1;
+			}
+		});
+		setPlayers(sortedPlayers);
+	};
+
+	return <PlayersContext.Provider value={{ players, createPlayer, updatePlayer, deletePlayer, sortPlayers }}>{children}</PlayersContext.Provider>;
 };
 
 export default PlayersProvider;

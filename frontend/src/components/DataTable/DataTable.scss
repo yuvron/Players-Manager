@@ -37,6 +37,8 @@
 	th {
 		font-weight: bold;
 		padding: 1em 0.7em;
+		position: relative;
+		cursor: pointer;
 	}
 	td {
 		padding: 1.5em 0.7em;
@@ -53,6 +55,12 @@
 	}
 	.data-email {
 		text-transform: lowercase;
+	}
+	.sort-angle {
+		position: absolute;
+		bottom: 3%;
+		left: 50%;
+		translate: -50% 0;
 	}
 	&::-webkit-scrollbar {
 		width: 8px;

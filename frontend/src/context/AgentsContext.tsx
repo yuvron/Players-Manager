@@ -6,6 +6,7 @@ interface AgentContextState {
 	createAgent: (agent: Agent) => Promise<void>;
 	updateAgent: (id: number, agent: Agent) => Promise<void>;
 	deleteAgent: (id: number) => Promise<void>;
+	sortAgents: (sortType: string, sortOrder: number) => void;
 }
 
 const AgentsContext = createContext<AgentContextState | undefined>(undefined);
@@ -44,7 +45,16 @@ const AgentsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 		setAgents(agents.filter((a) => a.id !== id));
 	};
 
-	return <AgentsContext.Provider value={{ agents, createAgent, updateAgent, deleteAgent }}>{children}</AgentsContext.Provider>;
+	const sortAgents = (sortType: string, sortOrder: number) => {
+		const sortKey = sortType as keyof Agent;
+		const sortedAgents: Agent[] = [...agents];
+		sortedAgents.sort((a: Agent, b: Agent) => {
+			return a[sortKey] > b[sortKey] ? sortOrder : sortOrder * -1;
+		});
+		setAgents(sortedAgents);
+	};
+
+	return <AgentsContext.Provider value={{ agents, createAgent, updateAgent, deleteAgent, sortAgents }}>{children}</AgentsContext.Provider>;
 };
 
 export default AgentsProvider;
